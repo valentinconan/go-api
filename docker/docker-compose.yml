@@ -1,0 +1,18 @@
+version: '2.3'
+services:
+  go-api:
+    hostname: go-api
+    image: valentinconan/go-api:master
+    restart: unless-stopped
+    healthcheck:
+      test: wget -O /dev/null http://localhost:8080/ping || exit 1
+      interval: 1s
+      timeout: 5s
+      retries: 10
+    ports:
+      - 8080:8080
+    networks:
+      - api-network
+networks:
+  api-network:
+    driver: bridge
