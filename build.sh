@@ -8,6 +8,7 @@ help(){
     echo "Options: "
     echo -e "\t-h display help"
     echo -e "\t-d generate docker image"
+    echo -e "\t-s build without running test"
     echo ""
     echo "Sample : bash build.sh -d"
     exit 0
@@ -20,13 +21,14 @@ if [ "$SHLVL" -lt "2" ] ; then
 fi
 
 declare docker=false
+declare skip_tests=false
 
 declare red='\033[0;31m'
 declare yellow='\033[0;33m'
 declare default='\033[0m'
 declare cyan='\033[0;36m'
 
-while getopts ":hd" option; do
+while getopts ":hds" option; do
    case $option in
       h) # display Help
          help
@@ -39,6 +41,10 @@ while getopts ":hd" option; do
          echo -e "${yellow}Native Docker image will be generated locally"${default}""
          native=true
          ;;
+      s) #skip test
+        echo -e "${yellow}Using skip tests mode.${default}"
+        skip_tests=true
+        ;;
       \?) # exclude
          echo -e "${red}Error: Invalid option. Use -h for help${default}"
          exit;;
@@ -71,6 +77,10 @@ GOOS=linux GOARCH=amd64 go build -o bin/go-api-amd64-linux src/main.go
 #GOOS=linux GOARCH=amd64 go build -o bin/app-amd64-linux app.go
 # 32-bit
 #GOOS=linux GOARCH=386 go build -o bin/app-386-linux app.go
+
+if [ "$skip_tests" = false ]; then
+    go test ./...
+fi
 
 if [ "$docker" = true ]; then
     echo -e "${yellow}Building docker image...${default}"
