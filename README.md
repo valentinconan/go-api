@@ -26,6 +26,11 @@ use this command :
 ### build project
 In order to build project, as usual `bash build.sh`
 
+### Launch tests
+In order to launch all tests : `go test ./...`
+
+If you need to launch one specific test : `go test -run path/to/file_test.go`
+
 ### Docker commands
 
 run docker
