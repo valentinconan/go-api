@@ -68,15 +68,15 @@ go mod tidy
 GOOS=linux GOARCH=amd64 go build -o bin/go-api-amd64-linux src/main.go
 
 # possible to build for linux, windows and macOS on different architectures
-#GOOS=windows GOARCH=386 go build -o bin/app-386.exe app.go
+#GOOS=windows GOARCH=386 go build -o bin/app-386.exe src/main.go
 # 64-bit
-#GOOS=darwin GOARCH=amd64 go build -o bin/app-amd64-darwin app.go
+#GOOS=darwin GOARCH=amd64 go build -o bin/app-amd64-darwin src/main.go
 # 32-bit
-#GOOS=darwin GOARCH=386 go build -o bin/app-386-darwin app.go
+#GOOS=darwin GOARCH=386 go build -o bin/app-386-darwin src/main.go
 # 64-bit
-#GOOS=linux GOARCH=amd64 go build -o bin/app-amd64-linux app.go
+#GOOS=linux GOARCH=amd64 go build -o bin/app-amd64-linux src/main.go
 # 32-bit
-#GOOS=linux GOARCH=386 go build -o bin/app-386-linux app.go
+#GOOS=linux GOARCH=386 go build -o bin/app-386-linux src/main.go
 
 if [ "$skip_tests" = false ]; then
     go test ./...
