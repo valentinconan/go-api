@@ -7,9 +7,9 @@ import (
 	"strconv"
 )
 
-func Init(router *gin.Engine) {
+func Init(router *gin.RouterGroup) {
 
-	router.GET("/api/:id", validatePathParamFormat(), func(c *gin.Context) {
+	router.GET("/:id", validatePathParamFormat(), func(c *gin.Context) {
 
 		id := c.Param("id")
 
