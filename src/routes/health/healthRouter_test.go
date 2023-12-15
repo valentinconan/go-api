@@ -1,23 +1,23 @@
 package healthRouter
 
-
 import (
-	"net/http"
-	"net/http/httptest"
-	"testing"
-	"os"
 	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
+	"net/http"
+	"net/http/httptest"
+	"os"
+	"testing"
 )
 
 var router *gin.Engine
+
 func TestMain(m *testing.M) {
 	router = gin.Default()
-	Init(router.Group("/"))
-    os.Exit(m.Run())
+	NewHealthRouter().Init(router.Group("/"))
+	os.Exit(m.Run())
 }
 
-func fireGet(path string) *httptest.ResponseRecorder{
+func fireGet(path string) *httptest.ResponseRecorder {
 	w := httptest.NewRecorder()
 	req, _ := http.NewRequest("GET", path, nil)
 	router.ServeHTTP(w, req)
@@ -36,7 +36,7 @@ func TestInfoRoute(t *testing.T) {
 }
 
 func TestHealthRoute(t *testing.T) {
-    w := fireGet("/health")
+	w := fireGet("/health")
 	assert.Equal(t, 200, w.Code)
 	assert.JSONEq(t, `{"status":"OK"}`, w.Body.String())
 }
