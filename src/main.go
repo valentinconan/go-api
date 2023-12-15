@@ -1,13 +1,12 @@
 package main
 
 import (
-    "log"
-	"go-api/src/routes"
+	router "go-api/src/routes"
+	"log/slog"
 )
 
 func main() {
 
-    log.Print("Initializing router")
-	router.Init()
-
+	slog.Info("Initializing router")
+	go router.Init()
 }
