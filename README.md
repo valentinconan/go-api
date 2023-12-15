@@ -43,3 +43,12 @@ run docker
 ```
 curl  http://localhost:8080/info
 ```
+
+# Generate mocks
+In order to generate mock, we use Mockery. 
+
+First install it : 
+`go install github.com/vektra/mockery/v2@v2.38.0`
+
+Then generate mock into src folder using the following command
+>mockery
