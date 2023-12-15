@@ -8,5 +8,5 @@ import (
 func main() {
 
 	slog.Info("Initializing router")
-	go router.Init()
+	router.Init()
 }
